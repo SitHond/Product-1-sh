@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product-1-sh", "Product-1-sh\Product-1-sh.csproj", "{6BA975A1-6D24-48E6-B296-6DF2527525A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBShop", "DBShop\DBShop.csproj", "{CD0FAC8F-4F79-43C2-ADBA-C5AB9357C730}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BA975A1-6D24-48E6-B296-6DF2527525A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BA975A1-6D24-48E6-B296-6DF2527525A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BA975A1-6D24-48E6-B296-6DF2527525A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BA975A1-6D24-48E6-B296-6DF2527525A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD0FAC8F-4F79-43C2-ADBA-C5AB9357C730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD0FAC8F-4F79-43C2-ADBA-C5AB9357C730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD0FAC8F-4F79-43C2-ADBA-C5AB9357C730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD0FAC8F-4F79-43C2-ADBA-C5AB9357C730}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ABCD9932-6304-4062-8A21-E4631D26D13F}
+	EndGlobalSection
+EndGlobal
