@@ -7,12 +7,12 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Auth">
-    <StackPanel Margin="0,146,0,202">
-        <TextBlock Text="Неверный логин или пароль" Visibility="Hidden"/>
-        <TextBlock Text="Login"/>
+    <StackPanel Margin="0,51,0,52">
+        <Label Content="Login"/>
         <TextBox x:Name="LoginTextBox"/>
-        <TextBlock Text="Password"/>
+        <Label Content="Password"/>
         <PasswordBox x:Name="PasswordTextBox"/>
-        <Button Content="Login" Click="LoginButton"/>
+        <Label Content="Неверный логин или пароль" Visibility="Hidden" x:Name="ErrorBox"/>
+        <Button Content="Войти" Click="LoginButton"/>
     </StackPanel>
 </Page>

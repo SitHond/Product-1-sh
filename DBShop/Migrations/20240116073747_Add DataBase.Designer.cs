@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DBShop.Migrations
 {
-    [DbContext(typeof(DBShop))]
+    [DbContext(typeof(DBshop))]
     [Migration("20240116073747_Add DataBase")]
     partial class AddDataBase
     {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DBShop.Models
 {
-    [Table(nameof(DBShop.orders))]
+    [Table(nameof(DBshop.orders))]
     public class Orders
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

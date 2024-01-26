@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DBShop
 {
-    public class DBShop : DbContext
+    public class DBshop : DbContext
     {
         public DbSet<Users> users { get; set; }
         public DbSet<Orders> orders { get; set; }
