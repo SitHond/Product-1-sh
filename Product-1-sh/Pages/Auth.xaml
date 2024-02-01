@@ -7,12 +7,16 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Auth">
-    <StackPanel Margin="0,51,0,52">
+    <StackPanel Background="White" Margin="0,51,0,52">
         <Label Content="Login"/>
         <TextBox x:Name="LoginTextBox"/>
         <Label Content="Password"/>
         <PasswordBox x:Name="PasswordTextBox"/>
         <Label Content="Неверный логин или пароль" Visibility="Hidden" x:Name="ErrorBox"/>
-        <Button Content="Войти" Click="LoginButton"/>
+        <Button Content="Войти" Click="LoginButton" x:Name="LoginBtn"/>
+        <Label Content="Введите капчу" Visibility="Hidden" x:Name="LableCapcha"/>
+        <TextBlock Text="23" Visibility="Hidden" x:Name="BlockCapcha"/>
+        <TextBox Text="23" x:Name="ConfirmCapcha" Visibility="Hidden"/>
+        <Button Content="Отправить" Click="Button_Click" x:Name="ConfirmBtn" Visibility="Hidden"/>
     </StackPanel>
 </Page>

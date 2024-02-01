@@ -9,7 +9,16 @@
       Title="CatalogItems">
 
     <Grid Background="White">
-        <Label Content="Хто ты?" />
-        <Label Content="Какой-то текст" Visibility="Hidden" x:Name="TextProver"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="11*"/>
+        </Grid.RowDefinitions>
+            <Label Content="Хто ты?" Grid.Row="0" />
+        <Label Content="Какой-то текст" Visibility="Hidden" x:Name="TextProver" Grid.Row="1"/>
     </Grid>
 </Page>
