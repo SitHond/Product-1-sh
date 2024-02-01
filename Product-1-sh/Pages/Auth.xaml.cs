@@ -16,6 +16,18 @@ namespace Product_1_sh.Pages
         {
             public static Users AuthUser { get; set; }
         }
+        public class DbContext
+        {
+            private static DBshop _dbContext;
+            public static DBshop GetContext()
+            {
+                if (_dbContext == null)
+                {
+                    _dbContext = new DBshop();
+                }
+                return _dbContext;
+            }
+        }
 
         public Auth()
         {
@@ -23,10 +35,8 @@ namespace Product_1_sh.Pages
         }
 
         private void LoginButton(object sender, RoutedEventArgs e)
-        {
-            using (var context = new DBshop())
-            {               
-                var user = context.users.FirstOrDefault(u => u.Username == LoginTextBox.Text && u.Password == PasswordTextBox.Password);
+        {       
+                var user = DbContext.GetContext().users.FirstOrDefault(u => u.Username == LoginTextBox.Text && u.Password == PasswordTextBox.Password);
 
                 if (user != null)
                 {
@@ -49,7 +59,6 @@ namespace Product_1_sh.Pages
                     count++;
                     ErrorBox.Visibility = Visibility;
                 }
-            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

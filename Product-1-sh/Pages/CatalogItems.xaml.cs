@@ -1,5 +1,5 @@
 ﻿
-using Product_1_sh.Controller;
+using DBShop.Models;
 using System.Windows;
 using System.Windows.Controls;
 using static Product_1_sh.Pages.Auth;
@@ -12,11 +12,14 @@ namespace Product_1_sh.Pages
     /// 
     public partial class CatalogItems : Page
     {
-        private readonly AuthorizationController authorizationController;
-
         public CatalogItems()
         {
             InitializeComponent();
+            var context = DbContext.GetContext();
+            List<ItemList> prods = context.itemLists.ToList();
+            listView.ItemsSource = prods;
+
+
             if (CurrentUser.AuthUser.IsAdmin == true)
             {
                 TextProver.Content = "Админ";
