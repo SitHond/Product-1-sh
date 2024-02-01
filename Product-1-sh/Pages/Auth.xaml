@@ -14,6 +14,7 @@
         <PasswordBox x:Name="PasswordTextBox"/>
         <Label Content="Неверный логин или пароль" Visibility="Hidden" x:Name="ErrorBox"/>
         <Button Content="Войти" Click="LoginButton" x:Name="LoginBtn"/>
+        <Button Content="Гость" Click="Button_Click_1"/>
         <Label Content="Введите капчу" Visibility="Hidden" x:Name="LableCapcha"/>
         <TextBlock Text="23" Visibility="Hidden" x:Name="BlockCapcha"/>
         <TextBox Text="23" x:Name="ConfirmCapcha" Visibility="Hidden"/>

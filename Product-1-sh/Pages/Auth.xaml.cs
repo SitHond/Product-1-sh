@@ -36,7 +36,7 @@ namespace Product_1_sh.Pages
 
         private void LoginButton(object sender, RoutedEventArgs e)
         {       
-                var user = DbContext.GetContext().users.FirstOrDefault(u => u.Username == LoginTextBox.Text && u.Password == PasswordTextBox.Password);
+                var user = DbContext.GetContext().users.FirstOrDefault(u => u.Login == LoginTextBox.Text && u.Password == PasswordTextBox.Password);
 
                 if (user != null)
                 {
@@ -70,6 +70,32 @@ namespace Product_1_sh.Pages
                 LableCapcha.Visibility = Visibility.Hidden;
                 ConfirmCapcha.Visibility = Visibility.Hidden;
                 ConfirmBtn.Visibility = Visibility.Hidden; 
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var user = DbContext.GetContext().users.FirstOrDefault(u => u.Login == "guest"  && u.Password == "guest");
+            if (user != null)
+            {
+                CurrentUser.AuthUser = user;
+                NavigationService.Navigate(new CatalogItems());
+            }
+            else if (count == 5)
+            {
+                Random random = new Random();
+                BlockCapcha.Visibility = Visibility.Visible;
+                LableCapcha.Visibility = Visibility.Visible;
+                ConfirmCapcha.Visibility = Visibility.Visible;
+                ConfirmBtn.Visibility = Visibility.Visible;
+                LoginBtn.IsEnabled = false;
+                BlockCapcha.Text = Convert.ToString(random.Next(ALF.Length));
+
+            }
+            else
+            {
+                count++;
+                ErrorBox.Visibility = Visibility;
             }
         }
     }
