@@ -8,10 +8,8 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CatalogItems">
 
-    <Grid>
+    <Grid Background="White">
         <Label Content="Хто ты?" />
-        <Label Content="Админ" Visibility="Hidden" x:Name="TxtA"/>
-        <Label Content="Менеджер" Visibility="Hidden" x:Name="TxtM"/>
-        <Label Content="Гость" Visibility="Hidden" x:Name="TxtG"/>
+        <Label Content="Какой-то текст" Visibility="Hidden" x:Name="TextProver"/>
     </Grid>
 </Page>

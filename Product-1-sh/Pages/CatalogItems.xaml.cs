@@ -29,6 +29,21 @@ namespace Product_1_sh.Pages
         public CatalogItems()
         {
             InitializeComponent();
+            if (CurrentUser.AuthUser.IsAdmin == true)
+            {
+                TextProver.Content = "Админ";
+                TextProver.Visibility = Visibility.Visible;
+            }
+            else if (CurrentUser.AuthUser.IsManager == true)
+            {
+                TextProver.Content = "Менеджер";
+                TextProver.Visibility = Visibility.Visible;
+            }
+            else if (CurrentUser.AuthUser.IsGuest == true)
+            {
+                TextProver.Content = "Гость";
+                TextProver.Visibility = Visibility.Visible;
+            }
         }
     }
 }

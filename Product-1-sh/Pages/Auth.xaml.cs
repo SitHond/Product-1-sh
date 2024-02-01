@@ -1,8 +1,5 @@
 ﻿using DBShop;
 using DBShop.Models;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,6 +13,8 @@ namespace Product_1_sh.Pages
         public Auth()
         {
             InitializeComponent();
+
+
         }
 
         private void LoginButton(object sender, RoutedEventArgs e)
@@ -24,11 +23,10 @@ namespace Product_1_sh.Pages
             {
                 var user = context.users.FirstOrDefault(u => u.Username == LoginTextBox.Text && u.Password == PasswordTextBox.Password);
 
-                
-
                 if (user != null)
                 {
-                   NavigationService.Navigate(new CatalogItems());
+                    CurrentUser.AuthUser = user;
+                    NavigationService.Navigate(new CatalogItems());
                 }
                 else
                 {
@@ -37,15 +35,8 @@ namespace Product_1_sh.Pages
             }
         }
     }
-    public static class GetUsersDb
+    public static class CurrentUser
     {
-        private static List<Users> user = new List<Users>();
-
-        public static List<Users> GetUsers() 
-        {
-            return user;
-        }
-
-
+        public static Users AuthUser { get; set; }
     }
 }
