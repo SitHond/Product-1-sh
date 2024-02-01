@@ -39,41 +39,32 @@ namespace Product_1_sh.Pages
         {       
                 var user = DbContext.Context.users.FirstOrDefault(u => u.Login == LoginTextBox.Text && u.Password == PasswordTextBox.Password);
 
-                if (user != null)
+            if (user != null)
+            {
+                CurrentUser.AuthUser = user;
+                NavigationService.Navigate(new CatalogItems());
+            }
+            else if (count == 5)
+            {
+                Random random = new Random();
+                BlockCapcha.Visibility = Visibility.Visible;
+                LableCapcha.Visibility = Visibility.Visible;
+                ConfirmCapcha.Visibility = Visibility.Visible;
+                BlockCapcha.Text = Convert.ToString(random.Next(ALF.Length));
+                if (BlockCapcha.Text == ConfirmCapcha.Text)
                 {
-                    CurrentUser.AuthUser = user;
+                    BlockCapcha.Visibility = Visibility.Hidden;
+                    LableCapcha.Visibility = Visibility.Hidden;
+                    ConfirmCapcha.Visibility = Visibility.Hidden;
                     NavigationService.Navigate(new CatalogItems());
                 }
-                else if (count == 5)
-                {
-                    Random random = new Random();
-                    BlockCapcha.Visibility = Visibility.Visible;
-                    LableCapcha.Visibility = Visibility.Visible;
-                    ConfirmCapcha.Visibility = Visibility.Visible;
-                    ConfirmBtn.Visibility = Visibility.Visible;
-                    LoginBtn.IsEnabled = false;
-                    BlockCapcha.Text = Convert.ToString(random.Next(ALF.Length));
-
-                }
-                else
-                {
-                    count++;
-                    ErrorBox.Visibility = Visibility;
-                }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (BlockCapcha.Text == ConfirmCapcha.Text)
+            }
+            else
             {
-                LoginBtn.IsEnabled = true;
-                BlockCapcha.Visibility = Visibility.Hidden;
-                LableCapcha.Visibility = Visibility.Hidden;
-                ConfirmCapcha.Visibility = Visibility.Hidden;
-                ConfirmBtn.Visibility = Visibility.Hidden; 
+                count++;
+                ErrorBox.Visibility = Visibility;
             }
         }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var user = DbContext.Context.users.FirstOrDefault(u => u.Login == "guest"  && u.Password == "guest");

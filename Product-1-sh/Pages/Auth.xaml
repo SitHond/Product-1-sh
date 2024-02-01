@@ -18,6 +18,5 @@
         <Label Content="Введите капчу" Visibility="Hidden" x:Name="LableCapcha"/>
         <TextBlock Text="23" Visibility="Hidden" x:Name="BlockCapcha"/>
         <TextBox Text="23" x:Name="ConfirmCapcha" Visibility="Hidden"/>
-        <Button Content="Отправить" Click="Button_Click" x:Name="ConfirmBtn" Visibility="Hidden"/>
     </StackPanel>
 </Page>
