@@ -15,7 +15,7 @@ namespace Product_1_sh.Pages
         public CatalogItems()
         {
             InitializeComponent();
-            var context = DbContext.GetContext();
+            var context = DbContext.Context;
             List<ItemList> prods = context.itemLists.ToList();
             listView.ItemsSource = prods;
 
