@@ -1,6 +1,5 @@
 ﻿
 using DBShop.Models;
-
 using System.Windows;
 using System.Windows.Controls;
 using static Product_1_sh.Pages.Auth;

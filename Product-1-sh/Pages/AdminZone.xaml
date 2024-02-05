@@ -27,13 +27,13 @@
             <Button Content="Назад" Click="Exit_Click"/>
         </StackPanel>
         <StackPanel Grid.Column="2">
-            <Label Content="Текст для действия" x:Name="TxTAd"/>
+            <Label Content="Редактирование раздела с товарами" x:Name="TxTAd"/>
             <Button Content="Справка по исрользованию">
                 <Button.ToolTip>
                     <ToolTip Content="Для изменения данных внерите изменения в любой из строчки и нажмите в любое сводобное место на экране"/>
                 </Button.ToolTip>
             </Button>
-            <DataGrid x:Name="dataGrid" AutoGenerateColumns="True">
+            <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" VirtualizingPanel.ScrollUnit="Pixel" VerticalScrollBarVisibility="Visible">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Action">
                         <DataGridTemplateColumn.CellTemplate>

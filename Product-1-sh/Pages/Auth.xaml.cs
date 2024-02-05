@@ -37,45 +37,58 @@ namespace Product_1_sh.Pages
         }
 
         private void LoginButton(object sender, RoutedEventArgs e)
-        {       
+        {
+            try
+            {
                 var user = DbContext.Context.users.FirstOrDefault(u => u.Login == LoginTextBox.Text && u.Password == PasswordTextBox.Password);
-
-            if (user != null)
-            {
-                CurrentUser.AuthUser = user;
-                NavigationService.Navigate(new CatalogItems());
-            }
-            else if (count == 5)
-            {
-                BlockCapcha.Visibility = Visibility.Visible;
-                LableCapcha.Visibility = Visibility.Visible;
-                ConfirmCapcha.Visibility = Visibility.Visible;
-                BlockCapcha.Text = Convert.ToString(random.Next(ALF.Length));
-                if (BlockCapcha.Text == ConfirmCapcha.Text)
+                if (user != null)
                 {
-                    BlockCapcha.Visibility = Visibility.Hidden;
-                    LableCapcha.Visibility = Visibility.Hidden;
-                    ConfirmCapcha.Visibility = Visibility.Hidden;
+                    CurrentUser.AuthUser = user;
                     NavigationService.Navigate(new CatalogItems());
                 }
+                else if (count == 5)
+                {
+                    BlockCapcha.Visibility = Visibility.Visible;
+                    LableCapcha.Visibility = Visibility.Visible;
+                    ConfirmCapcha.Visibility = Visibility.Visible;
+                    BlockCapcha.Text = Convert.ToString(random.Next(ALF.Length));
+                    if (BlockCapcha.Text == ConfirmCapcha.Text)
+                    {
+                        BlockCapcha.Visibility = Visibility.Hidden;
+                        LableCapcha.Visibility = Visibility.Hidden;
+                        ConfirmCapcha.Visibility = Visibility.Hidden;
+                        NavigationService.Navigate(new CatalogItems());
+                    }
+                }
+                else
+                {
+                    count++;
+                    ErrorBox.Visibility = Visibility;
+                }
             }
-            else
+            catch
             {
-                count++;
-                ErrorBox.Visibility = Visibility;
+                MessageBox.Show("Программа завершае работу, просба не волноваться т.к оно запланированно");
             }
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var user = DbContext.Context.users.FirstOrDefault(u => u.Login == "guest"  && u.Password == "guest");
-            if (user != null)
+            try
             {
-                CurrentUser.AuthUser = user;
-                NavigationService.Navigate(new CatalogItems());
+                var user = DbContext.Context.users.FirstOrDefault(u => u.Login == "guest" && u.Password == "guest");
+                if (user != null)
+                {
+                    CurrentUser.AuthUser = user;
+                    NavigationService.Navigate(new CatalogItems());
+                }
+                else
+                {
+                    MessageBox.Show("Администратор не создал учетную запись гостя", "Error");
+                }
             }
-            else
+            catch 
             {
-                MessageBox.Show("Администратор не создал учетную запись гостя", "Error");
+                MessageBox.Show("Программа завершае работу, просба не волноваться т.к оно запланированно");
             }
         }
     }
