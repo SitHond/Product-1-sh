@@ -29,10 +29,17 @@ namespace Product_1_sh.Pages
             try
             {
                 ItemList SelItem = (ItemList)dataGrid.SelectedItem;
-                var itemDel = DbContext.Context.itemLists.FirstOrDefault(i => i.Id == SelItem.Id);
-                DbContext.Context.Remove(SelItem);
-                DbContext.Context.SaveChanges();
-                GetDataGrid();
+                if (SelItem != null)
+                {
+                    var itemDel = DbContext.Context.itemLists.FirstOrDefault(i => i.Id == SelItem.Id);
+                    DbContext.Context.Remove(SelItem);
+                    DbContext.Context.SaveChanges();
+                    GetDataGrid();
+                }
+                else
+                {
+                    MessageBox.Show("Нвозможное действие");
+                }
             }
             catch
             {
@@ -63,7 +70,7 @@ namespace Product_1_sh.Pages
                 };
                 DbContext.Context.itemLists.Add(itemList);
                 DbContext.Context.SaveChanges();
-
+                Tname.Text = null; Tdesc.Text = null;
                 GetDataGrid();
             }
             catch
