@@ -10,8 +10,9 @@ namespace Product_1_sh.Pages
     /// </summary>
     public partial class Auth : Page
     {
-        public int count = 0;
-        public static string ALF = "1234567890QWERTYUIOPASDFGHJKLZXCVBNM";
+        Random random = new Random();
+        static int count = 0;
+        static string ALF = "1234567890QWERTYUIOPASDFGHJKLZXCVBNM";
         public static class CurrentUser
         {
             public static Users AuthUser { get; set; }
@@ -46,7 +47,6 @@ namespace Product_1_sh.Pages
             }
             else if (count == 5)
             {
-                Random random = new Random();
                 BlockCapcha.Visibility = Visibility.Visible;
                 LableCapcha.Visibility = Visibility.Visible;
                 ConfirmCapcha.Visibility = Visibility.Visible;

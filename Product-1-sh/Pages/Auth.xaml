@@ -9,14 +9,14 @@
       Title="Auth">
     <StackPanel Background="White" Margin="0,51,0,52">
         <Label Content="Login"/>
-        <TextBox x:Name="LoginTextBox"/>
+        <TextBox x:Name="LoginTextBox" Text="admin"/>
         <Label Content="Password"/>
-        <PasswordBox x:Name="PasswordTextBox"/>
+        <PasswordBox x:Name="PasswordTextBox" Password="admin"/>
         <Label Content="Неверный логин или пароль" Visibility="Hidden" x:Name="ErrorBox"/>
         <Button Content="Войти" Click="LoginButton" x:Name="LoginBtn"/>
         <Button Content="Гость" Click="Button_Click_1"/>
         <Label Content="Введите капчу" Visibility="Hidden" x:Name="LableCapcha"/>
-        <TextBlock Text="23" Visibility="Hidden" x:Name="BlockCapcha"/>
-        <TextBox Text="23" x:Name="ConfirmCapcha" Visibility="Hidden"/>
+        <TextBlock Text="" Visibility="Hidden" x:Name="BlockCapcha"/>
+        <TextBox Text="" x:Name="ConfirmCapcha" Visibility="Hidden"/>
     </StackPanel>
 </Page>
