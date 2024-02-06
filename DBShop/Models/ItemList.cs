@@ -17,5 +17,7 @@ namespace DBShop.Models
         public string Name { get; set; }
         [MaxLength(255)]
         public string Description { get; set; }
+        [MaxLength(255)]
+        public string Img { get; set; }
     }
 }

@@ -67,6 +67,7 @@ namespace Product_1_sh.Pages
                 {
                     Name = Tname.Text,
                     Description = Tdesc.Text,
+                    Img = "C:\\Users\\admin\\Desktop\\Лабораторная работа №1\\Сессия 1/picture.png",
                 };
                 DbContext.Context.itemLists.Add(itemList);
                 DbContext.Context.SaveChanges();
