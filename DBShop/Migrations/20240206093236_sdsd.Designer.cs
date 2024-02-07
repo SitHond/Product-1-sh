@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DBShop.Migrations
 {
     [DbContext(typeof(DBshop))]
-    [Migration("20240116073747_Add DataBase")]
-    partial class AddDataBase
+    [Migration("20240206093236_sdsd")]
+    partial class sdsd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,34 @@ namespace DBShop.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DBShop.Models.ItemList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Img")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("itemLists");
+                });
 
             modelBuilder.Entity("DBShop.Models.Orders", b =>
                 {
@@ -64,17 +92,23 @@ namespace DBShop.Migrations
 
             modelBuilder.Entity("DBShop.Models.PP", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("Id_pp")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_pp"));
 
-                    b.Property<string>("Nane")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("itemListId")
+                        .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("ordersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id_pp");
+
+                    b.HasIndex("itemListId");
+
+                    b.HasIndex("ordersId");
 
                     b.ToTable("pp");
                 });
@@ -87,15 +121,20 @@ namespace DBShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsGuest")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsManager")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Login")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Rule")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -106,6 +145,25 @@ namespace DBShop.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("users");
+                });
+
+            modelBuilder.Entity("DBShop.Models.PP", b =>
+                {
+                    b.HasOne("DBShop.Models.ItemList", "itemList")
+                        .WithMany()
+                        .HasForeignKey("itemListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBShop.Models.Orders", "orders")
+                        .WithMany()
+                        .HasForeignKey("ordersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("itemList");
+
+                    b.Navigation("orders");
                 });
 #pragma warning restore 612, 618
         }

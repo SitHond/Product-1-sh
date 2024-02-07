@@ -9,6 +9,7 @@ namespace DBShop
         public DbSet<Orders> orders { get; set; }
         public DbSet<PP> pp { get; set; }
         public DbSet<ItemList> itemLists { get; set; }
+        public DbSet<UserToItem> userToItems { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=DBShop_sh;Trusted_Connection=True;TrustServerCertificate=True");

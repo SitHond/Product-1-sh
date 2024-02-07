@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DBShop.Models
@@ -7,7 +9,9 @@ namespace DBShop.Models
     public class PP
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public string Nane { get; set; }
+        [Key]
+        public int Id_pp { get; set; }
+        public ItemList itemList { get; set; }
+        public Orders orders { get; set; }
     }
 }

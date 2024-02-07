@@ -53,7 +53,7 @@ namespace Product_1_sh.Pages
 
         private void Buket_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Я работаю! :3 (❁´◡`❁)(┬┬﹏┬┬)^_^(*/ω＼*)(^///^):-D:P^_^^_____^:-P:-(:P:(U_U)::-O>:(:-(:-D");
+            NavigationService.Navigate(new basket());
         }
     }
 }

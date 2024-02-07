@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DBShop.Migrations
 {
     [DbContext(typeof(DBshop))]
-    [Migration("20240201073949_starts")]
-    partial class starts
+    [Migration("20240207090931_32323")]
+    partial class _32323
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,34 @@ namespace DBShop.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DBShop.Models.ItemList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Img")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("itemLists");
+                });
 
             modelBuilder.Entity("DBShop.Models.Orders", b =>
                 {
@@ -64,19 +92,48 @@ namespace DBShop.Migrations
 
             modelBuilder.Entity("DBShop.Models.PP", b =>
                 {
+                    b.Property<int>("Id_pp")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_pp"));
+
+                    b.Property<int>("itemListId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ordersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id_pp");
+
+                    b.HasIndex("itemListId");
+
+                    b.HasIndex("ordersId");
+
+                    b.ToTable("pp");
+                });
+
+            modelBuilder.Entity("DBShop.Models.UserToItem", b =>
+                {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Nane")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("pp");
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("userToItems");
                 });
 
             modelBuilder.Entity("DBShop.Models.Users", b =>
@@ -111,6 +168,44 @@ namespace DBShop.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("users");
+                });
+
+            modelBuilder.Entity("DBShop.Models.PP", b =>
+                {
+                    b.HasOne("DBShop.Models.ItemList", "itemList")
+                        .WithMany()
+                        .HasForeignKey("itemListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBShop.Models.Orders", "orders")
+                        .WithMany()
+                        .HasForeignKey("ordersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("itemList");
+
+                    b.Navigation("orders");
+                });
+
+            modelBuilder.Entity("DBShop.Models.UserToItem", b =>
+                {
+                    b.HasOne("DBShop.Models.ItemList", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBShop.Models.Users", "Users")
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

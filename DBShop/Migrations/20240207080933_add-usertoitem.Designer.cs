@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DBShop.Migrations
 {
     [DbContext(typeof(DBshop))]
-    [Migration("20240206062108_sdfd")]
-    partial class sdfd
+    [Migration("20240207080933_add-usertoitem")]
+    partial class addusertoitem
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -92,19 +92,48 @@ namespace DBShop.Migrations
 
             modelBuilder.Entity("DBShop.Models.PP", b =>
                 {
+                    b.Property<int>("Id_pp")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_pp"));
+
+                    b.Property<int>("itemListId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ordersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id_pp");
+
+                    b.HasIndex("itemListId");
+
+                    b.HasIndex("ordersId");
+
+                    b.ToTable("pp");
+                });
+
+            modelBuilder.Entity("DBShop.Models.UserToItem", b =>
+                {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Nane")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ItemListId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("pp");
+                    b.HasIndex("ItemListId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("userToItems");
                 });
 
             modelBuilder.Entity("DBShop.Models.Users", b =>
@@ -139,6 +168,44 @@ namespace DBShop.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("users");
+                });
+
+            modelBuilder.Entity("DBShop.Models.PP", b =>
+                {
+                    b.HasOne("DBShop.Models.ItemList", "itemList")
+                        .WithMany()
+                        .HasForeignKey("itemListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBShop.Models.Orders", "orders")
+                        .WithMany()
+                        .HasForeignKey("ordersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("itemList");
+
+                    b.Navigation("orders");
+                });
+
+            modelBuilder.Entity("DBShop.Models.UserToItem", b =>
+                {
+                    b.HasOne("DBShop.Models.ItemList", "ItemList")
+                        .WithMany()
+                        .HasForeignKey("ItemListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBShop.Models.Users", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ItemList");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

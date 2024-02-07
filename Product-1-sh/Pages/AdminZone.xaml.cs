@@ -67,16 +67,16 @@ namespace Product_1_sh.Pages
                 {
                     Name = Tname.Text,
                     Description = Tdesc.Text,
-                    Img = "C:\\Users\\admin\\Desktop\\Лабораторная работа №1\\Сессия 1/picture.png",
+                    Img = "C:\\Users\\Администратор\\Desktop\\экзамен\\Большая пачка.png",
                 };
                 DbContext.Context.itemLists.Add(itemList);
                 DbContext.Context.SaveChanges();
                 Tname.Text = null; Tdesc.Text = null;
                 GetDataGrid();
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Программа завершае работу, просба не волноваться т.к оно запланированно");
+                MessageBox.Show("Программа завершае работу, просба не волноваться т.к оно запланированно" + ex);
             }
         }
 
