@@ -30,7 +30,7 @@ namespace Product_1_sh.Pages
 
         private List<ItemList> GetItemsForUser(int currentUser)
         {
-                return DbContext.Context.userToItems.Where(uti => uti.Users.Id == currentUser).Select(uti => uti.Item).ToList();
+            return DbContext.Context.userToItems.Where(uti => uti.Users.Id == currentUser).Select(uti => uti.Item).ToList();
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)

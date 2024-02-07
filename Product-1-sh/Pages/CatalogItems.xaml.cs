@@ -1,5 +1,6 @@
 ﻿
 using DBShop.Models;
+using Microsoft.Identity.Client;
 using System.Windows;
 using System.Windows.Controls;
 using static Product_1_sh.Pages.Auth;
@@ -12,14 +13,17 @@ namespace Product_1_sh.Pages
     /// 
     public partial class CatalogItems : Page
     {
+        public void GetListViev()
+        {
+            var context = DbContext.Context;
+            List<ItemList> prods = context.itemLists.ToList();
+            listView.ItemsSource = prods;
+        }
         public CatalogItems()
         {
             InitializeComponent();
 
-            var context = DbContext.Context;
-            List<ItemList> prods = context.itemLists.ToList();
-            listView.ItemsSource = prods;
-
+            GetListViev();
 
             if (CurrentUser.AuthUser.IsAdmin == true)
             {
@@ -51,7 +55,46 @@ namespace Product_1_sh.Pages
             NavigationService.Navigate(new Auth());
         }
 
-        private void Buket_Click(object sender, RoutedEventArgs e)
+        private void AddBuket_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            ItemList prod = (ItemList)button.Tag;
+
+            if (prod != null)
+                {
+                // Получаем текущего авторизованного пользователя
+                var currentUser = CurrentUser.AuthUser;
+
+                    if (currentUser != null)
+                    {
+                        // Создаем новый объект UserToItem
+                        UserToItem userToItem = new UserToItem
+                        {
+                            Users = currentUser,
+                            Item = prod
+                        };
+
+                        // Добавляем новый объект UserToItem в контекст базы данных
+                        DbContext.Context.userToItems.Add(userToItem);
+
+                        // Сохраняем изменения в базе данных
+                        DbContext.Context.SaveChanges();
+
+                    // Обновляем ListView, если это необходимо
+                    GetListViev();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Пользователь не авторизован.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Выберите элемент для добавления.");
+                }
+        }
+
+        private void OpenBuket_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new basket());
         }

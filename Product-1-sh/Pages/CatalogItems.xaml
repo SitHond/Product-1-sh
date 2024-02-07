@@ -35,7 +35,7 @@
                             <Image Source="{Binding Img}" Grid.Column="0" MaxWidth="100" MaxHeight="100" Width="auto" Height="auto" />
                             <TextBlock Text="{Binding Name}" Grid.Column="1" HorizontalAlignment="Center" Padding="5"/>
                             <TextBlock Text="{Binding Description}" Grid.Column="2" Padding="5" TextWrapping="Wrap"/>
-                            <Button Content="Лох" Grid.Column="3" Click="Buket_Click"/>
+                            <Button Content="Лох" Grid.Column="3" Click="AddBuket_Click" Tag="{Binding}"/>
                         </Grid>
                     </Border>
                 </DataTemplate>
@@ -44,6 +44,7 @@
 
         <StackPanel Grid.Row="2" >
             <Button Content="Админ" x:Name="AdminButton" Click="AdminButton_Click"/>
+            <Button Content="Корзина" Click="OpenBuket_Click"/>
             <Button Content="Заказать" />
             <Button Content="Выйти"  Click="ExitAcc_Click"/>
         </StackPanel>
