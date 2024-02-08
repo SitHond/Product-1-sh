@@ -1,6 +1,5 @@
 ﻿
 using DBShop.Models;
-using Microsoft.Identity.Client;
 using System.Windows;
 using System.Windows.Controls;
 using static Product_1_sh.Pages.Auth;
@@ -62,25 +61,18 @@ namespace Product_1_sh.Pages
 
             if (prod != null)
                 {
-                // Получаем текущего авторизованного пользователя
                 var currentUser = CurrentUser.AuthUser;
 
                     if (currentUser != null)
                     {
-                        // Создаем новый объект UserToItem
                         UserToItem userToItem = new UserToItem
                         {
                             Users = currentUser,
                             Item = prod
                         };
-
-                        // Добавляем новый объект UserToItem в контекст базы данных
                         DbContext.Context.userToItems.Add(userToItem);
 
-                        // Сохраняем изменения в базе данных
                         DbContext.Context.SaveChanges();
-
-                    // Обновляем ListView, если это необходимо
                     GetListViev();
                     }
                     else
