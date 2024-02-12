@@ -12,7 +12,7 @@ namespace DBShop
         public DbSet<UserToItem> userToItems { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=DBShop_sh;Trusted_Connection=True;TrustServerCertificate=True");
+            optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=DBShop;User Id=postgres;Password=qwerty");
         }
     }
 }

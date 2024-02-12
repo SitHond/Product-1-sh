@@ -8,13 +8,13 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdminZone">
 
-    <Grid>
+    <Grid ScrollViewer.VerticalScrollBarVisibility="Visible">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -50,6 +50,15 @@
             <TextBox x:Name="Tname" />
             <Label Content="Description"/>
             <TextBox x:Name="Tdesc" />
+            <TextBox x:Name="Tdesc1" />
+            <TextBox x:Name="Tdesc2" />
+            <TextBox x:Name="Tdesc3" />
+            <TextBox x:Name="Tdesc4" />
+            <TextBox x:Name="Tdesc5" />
+            <TextBox x:Name="Tdesc6" />
+            <TextBox x:Name="Tdes7c" />
+            <TextBox x:Name="Tdesc8" />
+            <TextBox x:Name="Tdesc9" />
             <Button Content="Добавить товар" Click="Add_Click"/>
         </StackPanel>
     </Grid>

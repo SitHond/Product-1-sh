@@ -65,8 +65,17 @@ namespace Product_1_sh.Pages
             {
                 ItemList itemList = new ItemList
                 {
+                    Articul = Tdesc.Text,
                     Name = Tname.Text,
-                    Description = Tdesc.Text,
+                    Izm = Tdesc1.Text,
+                    Price = Convert.ToDouble(Tdesc2.Text),
+                    Skid = Convert.ToInt32(Tdesc3.Text),
+                    Manufacturer = Tdesc4.Text,
+                    Provider = Tdesc5.Text,
+                    Categoru = Tdesc6.Text,
+                    SkidOn = Convert.ToInt32(Tdes7c.Text),
+                    count = Convert.ToInt32(Tdesc8.Text),
+                    Description = Tdesc9.Text,
                     Img = "C:\\Users\\Администратор\\Desktop\\экзамен\\Большая пачка.png",
                 };
                 DbContext.Context.itemLists.Add(itemList);

@@ -35,7 +35,7 @@
                             <Image Source="{Binding Img}" Grid.Column="0" MaxWidth="100" MaxHeight="100" Width="auto" Height="auto" />
                             <TextBlock Text="{Binding Name}" Grid.Column="1" HorizontalAlignment="Center" Padding="5"/>
                             <TextBlock Text="{Binding Description}" Grid.Column="2" Padding="5" TextWrapping="Wrap"/>
-                            <Button Content="Лох" Grid.Column="3" Click="AddBuket_Click" Tag="{Binding}"/>
+                            <Button Content="Добпвить в корзину" Grid.Column="3" Click="AddBuket_Click" Tag="{Binding}" Height="30"/>
                         </Grid>
                     </Border>
                 </DataTemplate>
