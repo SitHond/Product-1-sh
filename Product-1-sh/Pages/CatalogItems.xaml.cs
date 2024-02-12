@@ -60,31 +60,50 @@ namespace Product_1_sh.Pages
             ItemList prod = (ItemList)button.Tag;
 
             if (prod != null)
-                {
+            {
                 var currentUser = CurrentUser.AuthUser;
 
-                    if (currentUser != null)
+                if (currentUser != null)
+                {
+                    // Получаем доступное количество товара из таблицы ItemList
+                    int availableQuantity = prod.count;
+
+                    // Проверяем, достаточно ли товара для добавления в корзину
+                    if (availableQuantity > 0)
                     {
+                        // Создаем запись UserToItem для добавления в корзину
                         UserToItem userToItem = new UserToItem
                         {
                             Users = currentUser,
                             Item = prod
                         };
-                        DbContext.Context.userToItems.Add(userToItem);
 
+                        // Добавляем запись в корзину
+                        DbContext.Context.userToItems.Add(userToItem);
                         DbContext.Context.SaveChanges();
-                    GetListViev();
+
+                        // Уменьшаем количество товара в базе данных на 1
+                        prod.count--;
+
+                        // Обновляем список товаров в корзине
+                        GetListViev();
                     }
                     else
                     {
-                        MessageBox.Show("Пользователь не авторизован.");
+                        MessageBox.Show("Извините, этот товар временно недоступен.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Выберите элемент для добавления.");
+                    MessageBox.Show("Пользователь не авторизован.");
                 }
+            }
+            else
+            {
+                MessageBox.Show("Выберите элемент для добавления.");
+            }
         }
+
 
         private void OpenBuket_Click(object sender, RoutedEventArgs e)
         {

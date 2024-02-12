@@ -17,7 +17,6 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
         <StackPanel>
             <Button Content="Добавить товар" Click="Vis_Click">
                 <Button.ToolTip>
@@ -26,40 +25,53 @@
             </Button>
             <Button Content="Назад" Click="Exit_Click"/>
         </StackPanel>
-        <StackPanel Grid.Column="2">
-            <Label Content="Редактирование раздела с товарами" x:Name="TxTAd"/>
-            <Button Content="Справка по исрользованию">
-                <Button.ToolTip>
-                    <ToolTip Content="Для изменения данных внерите изменения в любой из строчки и нажмите в любое сводобное место на экране"/>
-                </Button.ToolTip>
-            </Button>
-            <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" VirtualizingPanel.ScrollUnit="Pixel" VerticalScrollBarVisibility="Visible">
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Action">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Удалить" Click="Del_Click"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </StackPanel>
-        <StackPanel x:Name="AddForm" Grid.Row="1" Grid.Column="1">
-            <Label Content="Name"/>
-            <TextBox x:Name="Tname" />
-            <Label Content="Description"/>
-            <TextBox x:Name="Tdesc" />
-            <TextBox x:Name="Tdesc1" />
-            <TextBox x:Name="Tdesc2" />
-            <TextBox x:Name="Tdesc3" />
-            <TextBox x:Name="Tdesc4" />
-            <TextBox x:Name="Tdesc5" />
-            <TextBox x:Name="Tdesc6" />
-            <TextBox x:Name="Tdes7c" />
-            <TextBox x:Name="Tdesc8" />
-            <TextBox x:Name="Tdesc9" />
-            <Button Content="Добавить товар" Click="Add_Click"/>
-        </StackPanel>
+        <ScrollViewer  Grid.Column="2">
+            <StackPanel Grid.Column="2">
+                <Label Content="Редактирование раздела с товарами" x:Name="TxTAd"/>
+                <Button Content="Справка по исрользованию">
+                    <Button.ToolTip>
+                        <ToolTip Content="Для изменения данных внерите изменения в любой из строчки и нажмите в любое сводобное место на экране"/>
+                    </Button.ToolTip>
+                </Button>
+                <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" VirtualizingPanel.ScrollUnit="Pixel" VerticalScrollBarVisibility="Visible">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Action">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Удалить" Click="Del_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </ScrollViewer>
+        <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2">
+            <StackPanel x:Name="AddForm">
+                <Label Content="Articul" />
+                <TextBox x:Name="Tarticul" />
+                <Label Content="Name"/>
+                <TextBox x:Name="Tname" />
+                <Label Content="Izm"/>
+                <TextBox x:Name="Tizm" />
+                <Label Content="Price"/>
+                <TextBox x:Name="Tprice" />
+                <Label Content="Skid"/>
+                <TextBox x:Name="Tskid" />
+                <Label Content="Manufacturer"/>
+                <TextBox x:Name="Tmanufacturer" />
+                <Label Content="Provider"/>
+                <TextBox x:Name="Tprovider" />
+                <Label Content="Categoru"/>
+                <TextBox x:Name="Tcategoru" />
+                <Label Content="SkidOn"/>
+                <TextBox x:Name="TskidOn" />
+                <Label Content="count"/>
+                <TextBox x:Name="Tcount" />
+                <Label Content="Description"/>
+                <TextBox x:Name="Tdesc" />
+                <Button Content="Добавить товар" Click="Add_Click"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
