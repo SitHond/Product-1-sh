@@ -35,7 +35,7 @@
                             <Image Source="{Binding Img}" Grid.Column="0" MaxWidth="100" MaxHeight="100" Width="auto" Height="auto" />
                             <TextBlock Text="{Binding Name}" Grid.Column="1" HorizontalAlignment="Center" Padding="5"/>
                             <TextBlock Text="{Binding Description}" Grid.Column="2" Padding="5" TextWrapping="Wrap"/>
-                            <Button Content="Удалить" Click="DelItem_Click" Tag="{Binding}"/>
+                            <Button Content="Удалить" Click="DelItem_Click" CommandParameter="{Binding}"/>
                         </Grid>
                     </Border>
                 </DataTemplate>

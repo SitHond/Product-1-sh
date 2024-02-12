@@ -10,12 +10,38 @@ namespace Product_1_sh.Pages
     /// </summary>
     public partial class basket : Page
     {
-        public void GetDataGrid()
+        private void ShowCartItems()
         {
-            var context = DbContext.Context;
-            List<ItemList> prods = context.itemLists.ToList();
-            listView.ItemsSource = prods;
+            // Получаем текущего авторизованного пользователя
+            var currentUser = CurrentUser.AuthUser;
+
+            if (currentUser != null)
+            {
+                // Получаем все записи из таблицы UserToItem для текущего пользователя
+                List<UserToItem> userCartItems = DbContext.Context.userToItems.Where(uti => uti.Users.Id == currentUser.Id).ToList();
+
+                // Создаем список для хранения информации о товарах в корзине
+                List<ItemList> cartItems = new List<ItemList>();
+
+                // Для каждой записи UserToItem получаем соответствующий товар и добавляем его в список
+                foreach (UserToItem userToItem in userCartItems)
+                {
+                    ItemList item = DbContext.Context.itemLists.FirstOrDefault(i => i.Id == userToItem.Item.Id);
+                    if (item != null)
+                    {
+                        cartItems.Add(item);
+                    }
+                }
+
+                // Обновляем источник данных ListView
+                listView.ItemsSource = cartItems;
+            }
+            else
+            {
+                MessageBox.Show("Пользователь не авторизован.");
+            }
         }
+
         public basket()
         {
             InitializeComponent();
@@ -61,27 +87,34 @@ namespace Product_1_sh.Pages
 
         private void DelItem_Click(object sender, RoutedEventArgs e)
         {
+            // Получаем кнопку, на которую было нажато
             Button button = (Button)sender;
-            UserToItem userToItem = (UserToItem)button.Tag;
 
-            if (userToItem != null)
+            // Получаем товар, который нужно удалить, из параметра CommandParameter кнопки
+            ItemList selectedItem = (ItemList)button.CommandParameter;
+
+            if (selectedItem != null)
             {
                 // Получаем текущего авторизованного пользователя
-                var currentUser = CurrentUser.AuthUser;
+               var currentUser = CurrentUser.AuthUser;
 
                 if (currentUser != null)
                 {
-                    // Удаляем элемент из таблицы UserToItem по его идентификатору
-                    var itemDel = DbContext.Context.userToItems.FirstOrDefault(uti => uti.Id == userToItem.Id);
-                    if (itemDel != null)
+                    // Находим соответствующую запись в таблице UserToItem для текущего пользователя и выбранного товара
+                    UserToItem userCartItem = DbContext.Context.userToItems.FirstOrDefault(uti => uti.Users.Id == currentUser.Id && uti.Item.Id == selectedItem.Id);
+
+                    if (userCartItem != null)
                     {
-                        DbContext.Context.userToItems.Remove(itemDel);
+                        // Удаляем запись из базы данных
+                        DbContext.Context.userToItems.Remove(userCartItem);
                         DbContext.Context.SaveChanges();
-                        GetDataGrid();
+
+                        // Обновляем содержимое корзины
+                        ShowCartItems();
                     }
                     else
                     {
-                        MessageBox.Show("Элемент не найден.");
+                        MessageBox.Show("Товар не найден в корзине текущего пользователя.");
                     }
                 }
                 else
@@ -91,9 +124,10 @@ namespace Product_1_sh.Pages
             }
             else
             {
-                MessageBox.Show("Выберите элемент для удаления.");
+                MessageBox.Show("Выберите товар для удаления.");
             }
         }
+
 
     }
 }
