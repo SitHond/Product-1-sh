@@ -38,12 +38,12 @@ namespace Product_1_sh.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Нвозможное действие");
+                    MessageBox.Show("Невозможное действие");
                 }
             }
             catch
             {
-                MessageBox.Show("Программа завершае работу, просба не волноваться т.к оно запланированно");
+                MessageBox.Show("Программа завершает работу, просьба не волноваться т.к оно запланированно");
             }
         }
 
@@ -61,32 +61,33 @@ namespace Product_1_sh.Pages
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 ItemList itemList = new ItemList
                 {
                     Articul = Tarticul.Text,
+                    Tag = Ttag.Text,
                     Name = Tname.Text,
                     Izm = Tizm.Text,
-                    Price = Convert.ToDouble(Tprice.Text),
-                    Skid = Convert.ToInt32(Tskid.Text),
+                    Price = Tprice.Text,
+                    Skid = Tskid.Text,
                     Manufacturer = Tmanufacturer.Text,
                     Provider = Tprovider.Text,
                     Categoru = Tcategoru.Text,
-                    SkidOn = Convert.ToInt32(TskidOn.Text),
-                    count = Convert.ToInt32(Tcount.Text),
+                    SkidOn = TskidOn.Text,
+                    Count = Convert.ToInt16(Tcount.Text),
                     Description = Tdesc.Text,
-                    Img = "C:\\Users\\Администратор\\Desktop\\экзамен\\Большая пачка.png",
+                    Img = "C:\\Users\\SitHond\\Desktop\\222\\Сессия 1\\picture.png",
                 };
                 DbContext.Context.itemLists.Add(itemList);
                 DbContext.Context.SaveChanges();
-                Tname.Text = null; Tdesc.Text = null; Tarticul.Text = null; Tizm.Text = null; Tprice.Text = null; Tskid.Text = null; Tmanufacturer.Text = null; Tprovider.Text = null; Tcategoru.Text = null; TskidOn.Text = null; Tcount.Text = null;
+                //Tname.Text = null; Tdesc.Text = null; Tarticul.Text = null; Tizm.Text = null; Tprice.Text = null; Tskid.Text = null; Tmanufacturer.Text = null; Tprovider.Text = null; Tcategoru.Text = null; TskidOn.Text = null; Tcount.Text = null;
                 GetDataGrid();
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Программа завершае работу, просба не волноваться т.к оно запланированно" + ex);
-            }
+            //}
+            //catch(Exception ex)
+            //{
+            //    MessageBox.Show("Программа завершает работу, просьба не волноваться т.к оно запланированно" + ex);
+            //}
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)

@@ -32,7 +32,6 @@ namespace Product_1_sh.Pages
                         cartItems.Add(item);
                     }
                 }
-
                 // Обновляем источник данных ListView
                 listView.ItemsSource = cartItems;
             }
@@ -108,6 +107,7 @@ namespace Product_1_sh.Pages
                         // Удаляем запись из базы данных
                         DbContext.Context.userToItems.Remove(userCartItem);
                         DbContext.Context.SaveChanges();
+                        selectedItem.Count++;
 
                         // Обновляем содержимое корзины
                         ShowCartItems();

@@ -3,6 +3,7 @@ using System;
 using DBShop;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DBShop.Migrations
 {
     [DbContext(typeof(DBshop))]
-    partial class DBshopModelSnapshot : ModelSnapshot
+    [Migration("20240213070029_sdsd")]
+    partial class sdsd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,9 +41,6 @@ namespace DBShop.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Count")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -64,25 +64,25 @@ namespace DBShop.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.Property<string>("Price")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<double>("Price")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("Provider")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Skid")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Skid")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("SkidOn")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("SkidOn")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Tag")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("count")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

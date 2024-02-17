@@ -1,5 +1,6 @@
 ﻿
 using DBShop.Models;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using static Product_1_sh.Pages.Auth;
@@ -18,11 +19,26 @@ namespace Product_1_sh.Pages
             List<ItemList> prods = context.itemLists.ToList();
             listView.ItemsSource = prods;
         }
+        private void DisplaySearchResults(List<ItemList> items)
+        {
+            if (items.Count > 0)
+            {
+                ObservableCollection<ItemList> foundItems = new ObservableCollection<ItemList>(items);
+                listView.ItemsSource = foundItems;
+            }
+            else
+            {
+                MessageBox.Show("Товары не найдены.");
+                listView.ItemsSource = null;
+            }
+        }
         public CatalogItems()
         {
             InitializeComponent();
 
             GetListViev();
+            var providers = DbContext.Context.itemLists.Select(i => i.Provider).Distinct().ToList();
+            ComboBoxItem.ItemsSource = providers;
 
             if (CurrentUser.AuthUser.IsAdmin == true)
             {
@@ -66,7 +82,7 @@ namespace Product_1_sh.Pages
                 if (currentUser != null)
                 {
                     // Получаем доступное количество товара из таблицы ItemList
-                    int availableQuantity = prod.count;
+                    int availableQuantity = prod.Count;
 
                     // Проверяем, достаточно ли товара для добавления в корзину
                     if (availableQuantity > 0)
@@ -83,7 +99,7 @@ namespace Product_1_sh.Pages
                         DbContext.Context.SaveChanges();
 
                         // Уменьшаем количество товара в базе данных на 1
-                        prod.count--;
+                        prod.Count--;
 
                         // Обновляем список товаров в корзине
                         GetListViev();
@@ -108,6 +124,62 @@ namespace Product_1_sh.Pages
         private void OpenBuket_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new basket());
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            // Получаем выбранного поставщика из ComboBox
+            string selectedProvider = ComboBoxItem.SelectedItem as string;
+
+            // Получаем текст из TextBox
+            string searchQuery = SearchBox.Text.Trim();
+
+            // Проверяем, заполнены ли оба поля
+            if (!string.IsNullOrEmpty(selectedProvider) || !string.IsNullOrEmpty(searchQuery))
+            {
+                // Если заполнены оба поля, производим поиск по обоим полям
+                if (!string.IsNullOrEmpty(selectedProvider) && !string.IsNullOrEmpty(searchQuery))
+                {
+                    var items = DbContext.Context.itemLists.Where(i => i.Provider == selectedProvider && i.Name.Contains(searchQuery)).ToList();
+                    DisplaySearchResults(items);
+                }
+                // Если заполнено только поле ComboBox, производим поиск только по поставщику
+                else if (!string.IsNullOrEmpty(selectedProvider))
+                {
+                    var items = DbContext.Context.itemLists.Where(i => i.Provider == selectedProvider).ToList();
+                    DisplaySearchResults(items);
+                }
+                // Если заполнено только поле TextBox, производим поиск только по имени товара
+                else
+                {
+                    var items = DbContext.Context.itemLists.Where(i => i.Name.Contains(searchQuery)).ToList();
+                    DisplaySearchResults(items);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите поставщика из списка или введите текст для поиска.");
+            }
+        }
+
+        private void Clean_Click(object sender, RoutedEventArgs e)
+        {
+            // Получаем все элементы из таблицы ItemList
+            var allItems = DbContext.Context.itemLists.ToList();
+
+            // Проверяем, есть ли элементы в таблице
+            if (allItems.Count > 0)
+            {
+                // Создаем ObservableCollection для хранения всех элементов
+                ObservableCollection<ItemList> allItemsCollection = new ObservableCollection<ItemList>(allItems);
+
+                // Устанавливаем все элементы как источник данных для ListView
+                listView.ItemsSource = allItemsCollection;
+            }
+            else
+            {
+                MessageBox.Show("Нет доступных товаров.");
+            }
         }
     }
 }

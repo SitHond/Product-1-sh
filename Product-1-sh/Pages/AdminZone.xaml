@@ -50,6 +50,8 @@
             <StackPanel x:Name="AddForm">
                 <Label Content="Articul" />
                 <TextBox x:Name="Tarticul" />
+                <Label Content="Tag" />
+                <TextBox x:Name="Ttag" />
                 <Label Content="Name"/>
                 <TextBox x:Name="Tname" />
                 <Label Content="Izm"/>
