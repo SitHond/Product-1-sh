@@ -8,6 +8,17 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdminZone">
 
+    <Page.Resources>
+        <Style TargetType="TextBox" x:Key="ErrorTextBoxStyle">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="BorderBrush" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
     <Grid ScrollViewer.VerticalScrollBarVisibility="Visible">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -17,6 +28,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
         <StackPanel>
             <Button Content="Добавить товар" Click="Vis_Click">
                 <Button.ToolTip>
@@ -48,8 +60,8 @@
         </ScrollViewer>
         <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2">
             <StackPanel x:Name="AddForm">
-                <Label Content="Articul" />
-                <TextBox x:Name="Tarticul" />
+                <Label Content="Articul"/>
+                <TextBox x:Name="Tarticul"/>
                 <Label Content="Tag" />
                 <TextBox x:Name="Ttag" />
                 <Label Content="Name"/>
@@ -69,7 +81,9 @@
                 <Label Content="SkidOn"/>
                 <TextBox x:Name="TskidOn" />
                 <Label Content="count"/>
-                <TextBox x:Name="Tcount" />
+                <TextBox x:Name="Tcount" Style="{StaticResource ErrorTextBoxStyle}" >
+                    
+                </TextBox>
                 <Label Content="Description"/>
                 <TextBox x:Name="Tdesc" />
                 <Button Content="Добавить товар" Click="Add_Click"/>

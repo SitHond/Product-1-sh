@@ -10,6 +10,7 @@ namespace Product_1_sh.Pages
     /// <summary>
     /// Логика взаимодействия для AdminZone.xaml
     /// </summary>
+
     public partial class AdminZone : Page
     {
         public void GetDataGrid()
@@ -61,8 +62,8 @@ namespace Product_1_sh.Pages
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 ItemList itemList = new ItemList
                 {
                     Articul = Tarticul.Text,
@@ -83,11 +84,13 @@ namespace Product_1_sh.Pages
                 DbContext.Context.SaveChanges();
                 //Tname.Text = null; Tdesc.Text = null; Tarticul.Text = null; Tizm.Text = null; Tprice.Text = null; Tskid.Text = null; Tmanufacturer.Text = null; Tprovider.Text = null; Tcategoru.Text = null; TskidOn.Text = null; Tcount.Text = null;
                 GetDataGrid();
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBox.Show("Программа завершает работу, просьба не волноваться т.к оно запланированно" + ex);
-            //}
+            }
+            catch (Exception ex)
+            {
+                Style errorTextBoxStyle = (Style)FindResource("ErrorTextBoxStyle");
+                Tarticul.Style = errorTextBoxStyle;
+                MessageBox.Show("Произошла ошибка при добавлении товара: " + ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
